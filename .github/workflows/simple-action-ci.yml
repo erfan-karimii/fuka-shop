@@ -7,8 +7,9 @@ jobs:
         runs-on: ubuntu-latest
         env:
             MY_POSTGRES_USER: postgres
-            MY_POSTGRES_PASSWORD: 
+            MY_POSTGRES_PASSWORD: '1'
             MY_POSTGRES_DB: fuka-shop
+            
         services:
             postgres_main:
               image: postgres:15

@@ -1,0 +1,3 @@
+django-colorfield
+model-bakery
+psycopg2

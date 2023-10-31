@@ -12,3 +12,15 @@ def show_categories(request):
 
 
 
+def create_product(request,cat):
+    form = CreateProductForm()
+    if request.method == 'POST':
+        form = form(request.POST)
+        if form.is_valid():
+            print('pass')
+        else:
+            print(form.error)
+    context = {
+        'form' : form
+    }
+    return render(request,'create-product.html',context)

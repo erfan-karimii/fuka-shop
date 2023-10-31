@@ -1,0 +1,16 @@
+name: Django CI
+on : ['push']
+
+jobs:
+    django-ci:
+        name: Django CI
+        runs-on: ubuntu-latest
+        container: python:3.10.4-buster
+        steps:
+            - uses: actions/checkout@v2
+      
+            - name: Install Poetry
+              uses: UKnowWhoIm/django-test-action@v0.6
+              with:
+                settings-dir-path: 'core/core'
+

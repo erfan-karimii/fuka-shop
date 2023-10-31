@@ -1,16 +1,38 @@
-name: Django CI
+name: Django Test with PostgreSQL
 on : ['push']
 
 jobs:
-    django-ci:
+    simple_build:
         name: Django CI
         runs-on: ubuntu-latest
         container: python:3.10.4-buster
+        env:
+            MY_POSTGRES_USER: postgres
+            MY_POSTGRES_PASSWORD: 
+            MY_POSTGRES_DB: fuka-shop
+        services:
+            postgres_main:
+              image: postgres:15
+              env:
+                POSTGRES_USER: ${{ env.MY_POSTGRES_USER }}
+                POSTGRES_PASSWORD: ${{ env.MY_POSTGRES_PASSWORD }}
+                POSTGRES_DB: ${{ env.MY_POSTGRES_DB }}
+              options: >-
+                --health-cmd pg_isready 
+                --health-interval 10s 
+                --health-timeout 5s 
+                --health-retries 5
         steps:
-            - uses: actions/checkout@v2
-      
-            - name: Install Poetry
-              uses: UKnowWhoIm/django-test-action@v0.6
+            - name: Checkout code
+              uses: actions/checkout@v2
+            - name: Setup Python 3.11.0
+              uses: actions/setup-python@v2
               with:
-                settings-dir-path: '../../core/core'
+                python-version: 3.11.0
+            - name: Install requirements
+              run: pip install -r requirements.txt
+            - name: Run tests
+              run: |
+                    cd core
+                    python manage.py test
 

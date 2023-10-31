@@ -5,7 +5,6 @@ jobs:
     simple_build:
         name: Django CI
         runs-on: ubuntu-latest
-        container: python:3.10.4-buster
         env:
             MY_POSTGRES_USER: postgres
             MY_POSTGRES_PASSWORD: 

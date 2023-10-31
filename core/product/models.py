@@ -36,15 +36,7 @@ class BaseProduct(models.Model):
 
     def __str__(self):
         return self.name
-
-    # def main_discount_call(self):
-    #     return self.price - (self.price * (self.discount/100))
     
-    # def calculate_price(self,count):
-    #     return self.main_discount_call() * count
-    
-    def in_stock(self):
-        return bool(self.count)
 
 
 class Mobile(BaseProduct):
